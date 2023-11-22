@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-def test_successful_redirection_to_personal_account(email, password):
+def test_successful_redirection_to_personal_account(get_email, get_password):
 
     driver = webdriver.Chrome()
     driver.get('https://stellarburgers.nomoreparties.site/')
@@ -12,9 +12,9 @@ def test_successful_redirection_to_personal_account(email, password):
     # Ссылка "Личный кабинет"
     driver.find_element(By.XPATH, ".//a[@href='/account']").click()
     # Поле "Email"
-    driver.find_element(By.XPATH, ".//fieldset[1]//input").send_keys(email)
+    driver.find_element(By.XPATH, ".//fieldset[1]//input").send_keys(get_email)
     # Поле "Пароль"
-    driver.find_element(By.XPATH, ".//fieldset[2]//input").send_keys(password)
+    driver.find_element(By.XPATH, ".//fieldset[2]//input").send_keys(get_password)
     # Кнопка "Войти"
     driver.find_element(By.XPATH, ".//button[text() = 'Войти']").click()
 
@@ -33,6 +33,3 @@ def test_successful_redirection_to_personal_account(email, password):
     assert 'account/profile' in driver.current_url
 
     driver.quit()
-
-
-test_successful_redirection_to_personal_account('testglinkin1997123@ya.ru', '123456')
