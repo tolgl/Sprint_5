@@ -32,3 +32,15 @@ def name_generation():
     name = ''.join(random.choices(string.ascii_lowercase, k=random.randint(3, 10)))
 
     return name
+
+@pytest.fixture()
+def get_email():
+    email = 'testglinkin1997123@ya.ru'
+
+    return email
+
+@pytest.fixture()
+def get_password():
+    password = '123456'
+
+    return password
