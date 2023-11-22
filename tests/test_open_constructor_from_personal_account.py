@@ -4,95 +4,84 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class Constructor:
+def test_successful_redirection_to_constructor_from_personal_account(get_email, get_password):
 
-    def __init__(self):
-        self.email = 'testglinkin1997123@ya.ru'
-        self.password = '123456'
+    driver = webdriver.Chrome()
+    driver.get('https://stellarburgers.nomoreparties.site/')
 
-    def test_successful_redirection_to_constructor_from_personal_account(self):
+    # Ссылка "Личный кабинет"
+    driver.find_element(By.XPATH, ".//a[@href='/account']").click()
+    # Поле "Email"
+    driver.find_element(By.XPATH, ".//fieldset[1]//input").send_keys(get_email)
+    # Поле "Пароль"
+    driver.find_element(By.XPATH, ".//fieldset[2]//input").send_keys(get_password)
+    # Кнопка "Войти"
+    driver.find_element(By.XPATH, ".//button[text() = 'Войти']").click()
 
-        driver = webdriver.Chrome()
-        driver.get('https://stellarburgers.nomoreparties.site/')
+    # Ожидаем появления кнопки "Оформить заказ" на главной странице
+    WebDriverWait(driver, 3).until(
+        expected_conditions.visibility_of_element_located((By.XPATH, ".//button[text() = 'Оформить заказ']")))
 
-        # Ссылка "Личный кабинет"
-        driver.find_element(By.XPATH, ".//a[@href='/account']").click()
-        # Поле "Email"
-        driver.find_element(By.XPATH, ".//fieldset[1]//input").send_keys(self.email)
-        # Поле "Пароль"
-        driver.find_element(By.XPATH, ".//fieldset[2]//input").send_keys(self.password)
-        # Кнопка "Войти"
-        driver.find_element(By.XPATH, ".//button[text() = 'Войти']").click()
+    # Ссылка "Личный кабинет"
+    driver.find_element(By.XPATH, ".//a[@href='/account']").click()
 
-        # Ожидаем появления кнопки "Оформить заказ" на главной странице
-        WebDriverWait(driver, 3).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//button[text() = 'Оформить заказ']")))
+    # Ожидаем появления кнопки "Выход" в ЛК
+    WebDriverWait(driver, 3).until(
+        expected_conditions.visibility_of_element_located((By.XPATH, ".//button[text() = 'Выход']")))
 
-        # Ссылка "Личный кабинет"
-        driver.find_element(By.XPATH, ".//a[@href='/account']").click()
+    # Ссылка "Конструктор"
+    driver.find_element(By.XPATH, ".//header//li[1]//a").click()
 
-        # Ожидаем появления кнопки "Выход" в ЛК
-        WebDriverWait(driver, 3).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//button[text() = 'Выход']")))
+    # Ожидаем появления элемента с продуктами
+    WebDriverWait(driver, 3).until(
+        expected_conditions.visibility_of_element_located(
+            (By.CLASS_NAME, "BurgerIngredients_ingredients__menuContainer__Xu3Mo")))
 
-        # Ссылка "Конструктор"
-        driver.find_element(By.XPATH, ".//header//li[1]//a").click()
+    # Заголовок "Соберите бургер"
+    element = driver.find_element(By.XPATH, ".//h1").text
 
-        # Ожидаем появления элемента с продуктами
-        WebDriverWait(driver, 3).until(
-            expected_conditions.visibility_of_element_located(
-                (By.CLASS_NAME, "BurgerIngredients_ingredients__menuContainer__Xu3Mo")))
+    # проверяем что на странице появился заголовок "Соберите бургер"
+    assert element == 'Соберите бургер'
 
-        # Заголовок "Соберите бургер"
-        element = driver.find_element(By.XPATH, ".//h1").text
-
-        # проверяем что на странице появился заголовок "Соберите бургер"
-        assert element == 'Соберите бургер'
-
-        driver.quit()
-
-    def test_successful_redirection_to_main_page_click_on_logo(self):
-
-        driver = webdriver.Chrome()
-        driver.get('https://stellarburgers.nomoreparties.site/')
-
-        # Ссылка "Личный кабинет"
-        driver.find_element(By.XPATH, ".//a[@href='/account']").click()
-        # Поле "Email"
-        driver.find_element(By.XPATH, ".//fieldset[1]//input").send_keys(self.email)
-        # Поле "Пароль"
-        driver.find_element(By.XPATH, ".//fieldset[2]//input").send_keys(self.password)
-        # Кнопка "Войти"
-        driver.find_element(By.XPATH, ".//button[text() = 'Войти']").click()
-
-        # Ожидаем появления кнопки "Оформить заказ" на главной странице
-        WebDriverWait(driver, 3).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//button[text() = 'Оформить заказ']")))
-
-        # Ссылка "Личный кабинет"
-        driver.find_element(By.XPATH, ".//a[@href='/account']").click()
-
-        # Ожидаем появления кнопки "Выход" в ЛК
-        WebDriverWait(driver, 3).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, ".//button[text() = 'Выход']")))
-
-        # Логотип Stellar Burgers
-        driver.find_element(By.CLASS_NAME, "AppHeader_header__logo__2D0X2").click()
-
-        # Ожидаем появления элемента с продуктами
-        WebDriverWait(driver, 3).until(
-            expected_conditions.visibility_of_element_located(
-                (By.CLASS_NAME, "BurgerIngredients_ingredients__menuContainer__Xu3Mo")))
-
-        # Заголовок "Соберите бургер"
-        element = driver.find_element(By.XPATH, ".//h1").text
-
-        # проверяем что на странице появился заголовок "Соберите бургер"
-        assert element == 'Соберите бургер'
-
-        driver.quit()
+    driver.quit()
 
 
-constructor = Constructor()
-constructor.test_successful_redirection_to_constructor_from_personal_account()
-constructor.test_successful_redirection_to_main_page_click_on_logo()
+def test_successful_redirection_to_main_page_click_on_logo(get_email, get_password):
+    driver = webdriver.Chrome()
+    driver.get('https://stellarburgers.nomoreparties.site/')
+
+    # Ссылка "Личный кабинет"
+    driver.find_element(By.XPATH, ".//a[@href='/account']").click()
+    # Поле "Email"
+    driver.find_element(By.XPATH, ".//fieldset[1]//input").send_keys(get_email)
+    # Поле "Пароль"
+    driver.find_element(By.XPATH, ".//fieldset[2]//input").send_keys(get_password)
+    # Кнопка "Войти"
+    driver.find_element(By.XPATH, ".//button[text() = 'Войти']").click()
+
+    # Ожидаем появления кнопки "Оформить заказ" на главной странице
+    WebDriverWait(driver, 3).until(
+        expected_conditions.visibility_of_element_located((By.XPATH, ".//button[text() = 'Оформить заказ']")))
+
+    # Ссылка "Личный кабинет"
+    driver.find_element(By.XPATH, ".//a[@href='/account']").click()
+
+    # Ожидаем появления кнопки "Выход" в ЛК
+    WebDriverWait(driver, 3).until(
+        expected_conditions.visibility_of_element_located((By.XPATH, ".//button[text() = 'Выход']")))
+
+    # Логотип Stellar Burgers
+    driver.find_element(By.CLASS_NAME, "AppHeader_header__logo__2D0X2").click()
+
+    # Ожидаем появления элемента с продуктами
+    WebDriverWait(driver, 3).until(
+        expected_conditions.visibility_of_element_located(
+            (By.CLASS_NAME, "BurgerIngredients_ingredients__menuContainer__Xu3Mo")))
+
+    # Заголовок "Соберите бургер"
+    element = driver.find_element(By.XPATH, ".//h1").text
+
+    # проверяем что на странице появился заголовок "Соберите бургер"
+    assert element == 'Соберите бургер'
+
+    driver.quit()
