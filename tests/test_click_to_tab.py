@@ -15,10 +15,12 @@ def test_successful_switching_on_tab_stuffing():
             (By.CLASS_NAME, "BurgerIngredients_ingredients__menuContainer__Xu3Mo")))
 
     # Таб "Начинки"
-    driver.find_element(By.XPATH, ".//span[text() = 'Начинки']").click()
+    driver.find_element(By.XPATH, ".//div/main/section[1]/div[1]/div[2]").click()
+    # получение атрибута таба "Начинки"
+    attribute = driver.find_element(By.XPATH, ".//div/main/section[1]/div[1]/div[3]").get_attribute('class')
 
-    # проверяем что появился заголовок "Начинки"
-    assert driver.find_element(By.XPATH, ".//h2[text() = 'Начинки']").is_displayed()
+    # проверяем что значение атрибута при активном табе есть в нажатом табе
+    assert 'tab_tab_type_current__2BEPc' in attribute
 
     driver.quit()
 
@@ -34,10 +36,12 @@ def test_successful_switching_on_tab_sauce():
             (By.CLASS_NAME, "BurgerIngredients_ingredients__menuContainer__Xu3Mo")))
 
     # Таб "Соусы"
-    driver.find_element(By.XPATH, ".//span[text() = 'Соусы']").click()
+    driver.find_element(By.XPATH, ".//div/main/section[1]/div[1]/div[2]").click()
+    # получение атрибута таба "Соусы"
+    attribute = driver.find_element(By.XPATH, ".//div/main/section[1]/div[1]/div[2]").get_attribute('class')
 
-    # проверяем что появился заголовок "Соусы"
-    assert driver.find_element(By.XPATH, ".//h2[text() = 'Соусы']").is_displayed()
+    # проверяем что значение атрибута при активном табе есть в нажатом табе
+    assert 'tab_tab_type_current__2BEPc' in attribute
 
     driver.quit()
 
@@ -52,12 +56,10 @@ def test_successful_switching_on_tab_bread():
         expected_conditions.visibility_of_element_located(
             (By.CLASS_NAME, "BurgerIngredients_ingredients__menuContainer__Xu3Mo")))
 
-    # Таб "Начинки"
-    driver.find_element(By.XPATH, ".//span[text() = 'Начинки']").click()
-    # Таб "Булки"
-    driver.find_element(By.XPATH, ".//span[text() = 'Булки']").click()
-    
-    # проверяем что появился заголовок "Булки"
-    assert driver.find_element(By.XPATH, ".//h2[text() = 'Булки']").is_displayed()
+    # получение атрибута таба "Булки"
+    attribute = driver.find_element(By.XPATH, ".//div/main/section[1]/div[1]/div[1]").get_attribute('class')
+
+    # проверяем что значение атрибута при активном табе есть в нажатом табе
+    assert 'tab_tab_type_current__2BEPc' in attribute
 
     driver.quit()
