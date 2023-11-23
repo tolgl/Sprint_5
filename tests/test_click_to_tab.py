@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+import pytest
+
 
 def test_successful_switching_on_tab_stuffing():
 
@@ -15,7 +17,7 @@ def test_successful_switching_on_tab_stuffing():
             (By.CLASS_NAME, "BurgerIngredients_ingredients__menuContainer__Xu3Mo")))
 
     # Таб "Начинки"
-    driver.find_element(By.XPATH, ".//div/main/section[1]/div[1]/div[2]").click()
+    driver.find_element(By.XPATH, ".//div/main/section[1]/div[1]/div[3]").click()
     # получение атрибута таба "Начинки"
     attribute = driver.find_element(By.XPATH, ".//div/main/section[1]/div[1]/div[3]").get_attribute('class')
 
