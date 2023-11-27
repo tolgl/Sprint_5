@@ -4,10 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-def test_successful_logging_out(get_email, get_password):
-
-    driver = webdriver.Chrome()
-    driver.get('https://stellarburgers.nomoreparties.site/')
+def test_successful_logging_out(driver, get_email, get_password):
 
     # Ссылка "Личный кабинет"
     driver.find_element(By.XPATH, ".//a[@href='/account']").click()
@@ -41,5 +38,3 @@ def test_successful_logging_out(get_email, get_password):
 
     # проверяем что на странице появился заголовок "Вход"
     assert element == 'Вход'
-
-    driver.quit()
