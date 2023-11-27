@@ -1,6 +1,7 @@
 import pytest
 import random
 import string
+from selenium import webdriver
 
 
 @pytest.fixture()
@@ -33,14 +34,25 @@ def name_generation():
 
     return name
 
+
 @pytest.fixture()
 def get_email():
     email = 'testglinkin1997123@ya.ru'
 
     return email
 
+
 @pytest.fixture()
 def get_password():
     password = '123456'
 
     return password
+
+
+@pytest.fixture()
+def driver():
+    driver = webdriver.Chrome()
+    driver.get('https://stellarburgers.nomoreparties.site/')
+
+    yield driver
+    driver.quit()
