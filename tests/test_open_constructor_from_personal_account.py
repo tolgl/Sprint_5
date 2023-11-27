@@ -4,10 +4,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-def test_successful_redirection_to_constructor_from_personal_account(get_email, get_password):
-
-    driver = webdriver.Chrome()
-    driver.get('https://stellarburgers.nomoreparties.site/')
+def test_successful_redirection_to_constructor_from_personal_account(driver, get_email, get_password):
 
     # Ссылка "Личный кабинет"
     driver.find_element(By.XPATH, ".//a[@href='/account']").click()
@@ -43,12 +40,8 @@ def test_successful_redirection_to_constructor_from_personal_account(get_email, 
     # проверяем что на странице появился заголовок "Соберите бургер"
     assert element == 'Соберите бургер'
 
-    driver.quit()
 
-
-def test_successful_redirection_to_main_page_click_on_logo(get_email, get_password):
-    driver = webdriver.Chrome()
-    driver.get('https://stellarburgers.nomoreparties.site/')
+def test_successful_redirection_to_main_page_click_on_logo(driver, get_email, get_password):
 
     # Ссылка "Личный кабинет"
     driver.find_element(By.XPATH, ".//a[@href='/account']").click()
@@ -83,5 +76,3 @@ def test_successful_redirection_to_main_page_click_on_logo(get_email, get_passwo
 
     # проверяем что на странице появился заголовок "Соберите бургер"
     assert element == 'Соберите бургер'
-
-    driver.quit()
