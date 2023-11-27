@@ -1,13 +1,9 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-def test_login_by_button_in_main_successful_login(get_email, get_password):
-
-    driver = webdriver.Chrome()
-    driver.get('https://stellarburgers.nomoreparties.site/')
+def test_login_by_button_in_main_successful_login(driver, get_email, get_password):
 
     # Кнопка "Войти в аккаунт"
     driver.find_element(By.XPATH, ".//button[text() = 'Войти в аккаунт']").click()
@@ -28,13 +24,8 @@ def test_login_by_button_in_main_successful_login(get_email, get_password):
     # проверяем что появилась кнопка "Оформить заказ" на главной странице
     assert element == 'Оформить заказ'
 
-    driver.quit()
 
-
-def test_login_by_link_in_header_successful_login(get_email, get_password):
-
-    driver = webdriver.Chrome()
-    driver.get('https://stellarburgers.nomoreparties.site/')
+def test_login_by_link_in_header_successful_login(driver, get_email, get_password):
 
     # Ссылка "Личный кабинет"
     driver.find_element(By.XPATH, ".//a[@href='/account']").click()
@@ -55,13 +46,8 @@ def test_login_by_link_in_header_successful_login(get_email, get_password):
     # проверяем что появилась кнопка "Оформить заказ" на главной странице
     assert element == 'Оформить заказ'
 
-    driver.quit()
 
-
-def test_login_by_link_on_form_registration_successful_login(get_email, get_password):
-
-    driver = webdriver.Chrome()
-    driver.get('https://stellarburgers.nomoreparties.site/')
+def test_login_by_link_on_form_registration_successful_login(driver, get_email, get_password):
 
     # Ссылка "Личный кабинет"
     driver.find_element(By.XPATH, ".//a[@href='/account']").click()
@@ -86,13 +72,8 @@ def test_login_by_link_on_form_registration_successful_login(get_email, get_pass
     # проверяем что появилась кнопка "Оформить заказ" на главной странице
     assert element == 'Оформить заказ'
 
-    driver.quit()
 
-
-def test_login_by_link_on_form_password_recovery_successful_login(get_email, get_password):
-
-    driver = webdriver.Chrome()
-    driver.get('https://stellarburgers.nomoreparties.site/')
+def test_login_by_link_on_form_password_recovery_successful_login(driver, get_email, get_password):
 
     # Ссылка "Личный кабинет"
     driver.find_element(By.XPATH, ".//a[@href='/account']").click()
@@ -116,5 +97,3 @@ def test_login_by_link_on_form_password_recovery_successful_login(get_email, get
 
     # проверяем что появилась кнопка "Оформить заказ" на главной странице
     assert element == 'Оформить заказ'
-
-    driver.quit()
